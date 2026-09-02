@@ -2,8 +2,8 @@
     "stable": {
         "1.0": {
             "current": "1.0.0",
-            "download": "https://techstudio.altervista.org/ESTENSIONI/custommenu/release/thunder_custommenu_1.0.0_stable.zip",
-            "announcement": "https://techstudio.altervista.org/",
+            "download": "https://github.com/ThunderBlue70/thunder-custommenu/raw/refs/heads/main/release/thunder_custommenu_1.0.0_stable.zip",
+            "announcement": "https://github.com/IL-TUO-USERNAME/thunder-custommenu",
             "eol": null,
             "security": false
         }
