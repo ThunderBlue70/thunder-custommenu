@@ -1,0 +1,122 @@
+{% INCLUDE 'overall_header.html' %}
+<h1>{{ lang('ACP_THUNDER_CUSTOMMENU_TITLE') }}</h1>
+<p>{{ lang('ACP_THUNDER_CUSTOMMENU_EXPLAIN') }}</p>
+<form id="acp_thunder_custommenu" method="post" action="{{ U_ACTION }}">
+<fieldset>
+<legend>{{ lang('ACP_THUNDER_CUSTOMMENU_SETTINGS') }}</legend>
+<dl><dt><label for="thunder_custommenu_enabled">{{ lang('ACP_THUNDER_CUSTOMMENU_ENABLED') }}</label></dt><dd><input type="checkbox" id="thunder_custommenu_enabled" name="thunder_custommenu_enabled" value="1"{% if THUNDER_CUSTOMMENU_ENABLED %} checked{% endif %}></dd></dl>
+<dl><dt><label for="thunder_custommenu_position">{{ lang('ACP_THUNDER_CUSTOMMENU_POSITION') }}</label></dt><dd><select id="thunder_custommenu_position" name="thunder_custommenu_position"><option value="integrated"{% if THUNDER_CUSTOMMENU_POSITION == 'integrated' %} selected{% endif %}>{{ lang('ACP_THUNDER_CUSTOMMENU_POSITION_INTEGRATED') }}</option><option value="separate"{% if THUNDER_CUSTOMMENU_POSITION == 'separate' %} selected{% endif %}>{{ lang('ACP_THUNDER_CUSTOMMENU_POSITION_SEPARATE') }}</option></select></dd></dl>
+<dl><dt><label for="thunder_custommenu_width">{{ lang('ACP_THUNDER_CUSTOMMENU_WIDTH') }}</label></dt><dd><input type="number" id="thunder_custommenu_width" name="thunder_custommenu_width" value="{{ THUNDER_CUSTOMMENU_WIDTH }}" min="700" max="1600"> px<br><span class="explain">{{ lang('ACP_THUNDER_CUSTOMMENU_WIDTH_EXPLAIN') }}</span></dd></dl>
+<dl><dt><label for="thunder_custommenu_height">{{ lang('ACP_THUNDER_CUSTOMMENU_HEIGHT') }}</label></dt><dd><input type="number" id="thunder_custommenu_height" name="thunder_custommenu_height" value="{{ THUNDER_CUSTOMMENU_HEIGHT }}" min="32" max="80"> px<br><span class="explain">{{ lang('ACP_THUNDER_CUSTOMMENU_HEIGHT_EXPLAIN') }}</span></dd></dl>
+<div class="tbcm-options">
+<label><input type="checkbox" id="thunder_custommenu_show_search" name="thunder_custommenu_show_search" value="1"{% if THUNDER_CUSTOMMENU_SHOW_SEARCH %} checked{% endif %}> {{ lang('ACP_THUNDER_CUSTOMMENU_SHOW_SEARCH') }}</label>
+<label><input type="checkbox" id="thunder_custommenu_show_quick_links" name="thunder_custommenu_show_quick_links" value="1"{% if THUNDER_CUSTOMMENU_SHOW_QUICK_LINKS %} checked{% endif %}> {{ lang('ACP_THUNDER_CUSTOMMENU_SHOW_QUICK_LINKS') }}</label>
+<label><input type="checkbox" id="thunder_custommenu_hide_index" name="thunder_custommenu_hide_index" value="1"{% if THUNDER_CUSTOMMENU_HIDE_INDEX %} checked{% endif %}> {{ lang('ACP_THUNDER_CUSTOMMENU_HIDE_INDEX') }}</label>
+</div>
+</fieldset>
+<fieldset>
+<legend>{{ lang('ACP_THUNDER_CUSTOMMENU_COLORS') }}</legend>
+<div class="tbcm-color-grid">
+<div class="tbcm-color-row"><label for="thunder_custommenu_bg">{{ lang('ACP_THUNDER_CUSTOMMENU_BG') }}</label><input type="color" id="thunder_custommenu_bg" name="thunder_custommenu_bg" value="{{ THUNDER_CUSTOMMENU_BG }}"></div>
+<div class="tbcm-color-row"><label for="thunder_custommenu_hover">{{ lang('ACP_THUNDER_CUSTOMMENU_HOVER') }}</label><input type="color" id="thunder_custommenu_hover" name="thunder_custommenu_hover" value="{{ THUNDER_CUSTOMMENU_HOVER }}"></div>
+<div class="tbcm-color-row"><label for="thunder_custommenu_text">{{ lang('ACP_THUNDER_CUSTOMMENU_TEXT') }}</label><input type="color" id="thunder_custommenu_text" name="thunder_custommenu_text" value="{{ THUNDER_CUSTOMMENU_TEXT }}"></div>
+<div class="tbcm-color-row"><label for="thunder_custommenu_dropdown_bg">{{ lang('ACP_THUNDER_CUSTOMMENU_DROPDOWN_BG') }}</label><input type="color" id="thunder_custommenu_dropdown_bg" name="thunder_custommenu_dropdown_bg" value="{{ THUNDER_CUSTOMMENU_DROPDOWN_BG }}"></div>
+<div class="tbcm-color-row"><label for="thunder_custommenu_dropdown_hover">{{ lang('ACP_THUNDER_CUSTOMMENU_DROPDOWN_HOVER') }}</label><input type="color" id="thunder_custommenu_dropdown_hover" name="thunder_custommenu_dropdown_hover" value="{{ THUNDER_CUSTOMMENU_DROPDOWN_HOVER }}"></div>
+<div class="tbcm-color-row"><label for="thunder_custommenu_dropdown_text">{{ lang('ACP_THUNDER_CUSTOMMENU_DROPDOWN_TEXT') }}</label><input type="color" id="thunder_custommenu_dropdown_text" name="thunder_custommenu_dropdown_text" value="{{ THUNDER_CUSTOMMENU_DROPDOWN_TEXT }}"></div>
+</div>
+</fieldset>
+<fieldset>
+<legend>{{ lang('ACP_THUNDER_CUSTOMMENU_ITEMS') }}</legend>
+<p>{{ lang('ACP_THUNDER_CUSTOMMENU_ITEMS_EXPLAIN') }}</p>
+<div class="tbcm-builder-actions">
+<button type="button" class="button1" id="tbcm-add-link">{{ lang('ACP_THUNDER_CUSTOMMENU_ADD_LINK') }}</button>
+<button type="button" class="button2" id="tbcm-add-menu">{{ lang('ACP_THUNDER_CUSTOMMENU_ADD_MENU') }}</button>
+<a class="button2 tbcm-fa-button" href="https://fontawesome.com/v4/icons/" target="_blank" rel="noopener noreferrer"><i class="icon fa-star" aria-hidden="true"></i> {{ lang('ACP_THUNDER_CUSTOMMENU_FA_ICONS') }}</a>
+</div>
+<div id="tbcm-items"></div>
+</fieldset>
+<input type="hidden" id="thunder_custommenu_menu" name="thunder_custommenu_menu" value="">
+<p class="submit-buttons"><input class="button1" type="submit" name="submit" value="{{ lang('SUBMIT') }}"></p>
+{{ S_FORM_TOKEN }}
+</form>
+<style>
+#tbcm-items{display:flex;flex-direction:column;gap:10px}
+.tbcm-builder-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tbcm-card{padding:10px;background:#f5f5f5;border:1px solid #d8d8d8;border-radius:4px}
+.tbcm-color-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 16px}
+.tbcm-color-row{display:flex;flex-direction:column;align-items:center;gap:6px}
+.tbcm-color-row label{display:block;text-align:center;font-weight:700}
+.tbcm-color-row input[type=color]{width:70px;height:36px;padding:2px;box-sizing:border-box}
+@media(max-width:700px){.tbcm-color-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tbcm-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.tbcm-card-title{display:flex;align-items:center;gap:8px;min-width:0}
+.tbcm-card-title strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbcm-card-move,.tbcm-move{display:flex;gap:3px;flex:0 0 auto}
+.tbcm-card-move .button2,.tbcm-move .button2,.tbcm-row>.button2,.tbcm-row .button2{min-width:26px;padding:2px 7px}
+.tbcm-row{display:flex;align-items:center;gap:6px;padding:6px;background:#fff;border:1px solid #ddd;border-radius:3px}
+.tbcm-row .tbcm-title{flex:1 1 180px;min-width:120px}
+.tbcm-row .tbcm-icon{width:105px}
+.tbcm-row .tbcm-url{flex:2 1 260px;min-width:160px}
+.tbcm-row .tbcm-target{width:125px}
+.tbcm-node{margin-top:6px}
+.tbcm-node>.tbcm-nested{margin-left:28px;padding-left:8px;border-left:2px solid #ddd}
+.tbcm-card>.tbcm-children{margin-top:6px}
+.tbcm-lock{padding:0 7px;opacity:.75}
+.tbcm-locked{background:#fafafa}
+.tbcm-card-quick .tbcm-card-head{opacity:.9}
+@media(max-width:900px){.tbcm-row{flex-wrap:wrap}.tbcm-row .tbcm-title,.tbcm-row .tbcm-url{flex-basis:100%}.tbcm-row .tbcm-icon{flex:1}.tbcm-row .tbcm-target{flex:1}}
+</style>
+<script>
+(function(){
+var initial={{ THUNDER_CUSTOMMENU_MENU_JSON|raw }},items=document.getElementById('tbcm-items'),hidden=document.getElementById('thunder_custommenu_menu'),form=document.getElementById('acp_thunder_custommenu');
+if(!Array.isArray(initial))initial=[];
+function esc(v){return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]})}
+function moveNode(node,direction,container){var target=direction==='up'?node.previousElementSibling:node.nextElementSibling;if(!target)return;container.insertBefore(node,direction==='up'?target:target.nextElementSibling);initial=collect()}
+function rowHtml(item,allowSub,allowRemove){
+var locked=!!item.quicklink_id;
+return '<div class="tbcm-row'+(locked?' tbcm-locked':'')+'" data-quicklink-id="'+esc(item.quicklink_id||'')+'">'
++'<div class="tbcm-move"><button type="button" class="button2 tbcm-move-up" title="{{ lang('ACP_THUNDER_CUSTOMMENU_MOVE_UP')|e('html_attr') }}">↑</button><button type="button" class="button2 tbcm-move-down" title="{{ lang('ACP_THUNDER_CUSTOMMENU_MOVE_DOWN')|e('html_attr') }}">↓</button></div>'
++'<input class="tbcm-title" type="text" placeholder="{{ lang('ACP_THUNDER_CUSTOMMENU_TITLE_FIELD')|e('js') }}" value="'+esc(item.title)+'"'+(locked?' readonly':'')+'>'
++'<input class="tbcm-icon" type="text" placeholder="fa-home" value="'+esc(item.icon)+'"'+(locked?' readonly':'')+'>'
++'<input class="tbcm-url" type="text" placeholder="https://... oppure ./ ../ index.php" value="'+esc(item.url)+'"'+(locked?' readonly':'')+'>'
++'<select class="tbcm-target"'+(locked?' disabled':'')+'><option value="_self"'+(item.target!=='_blank'?' selected':'')+'>Stessa scheda</option><option value="_blank"'+(item.target==='_blank'?' selected':'')+'>Nuova scheda</option></select>'
++(locked?'<span class="tbcm-lock" title="{{ lang('ACP_THUNDER_CUSTOMMENU_QUICK_LINKS_LOCKED')|e('html_attr') }}">🔒</span>':(allowSub?'<button type="button" class="button2 tbcm-add-sub" title="{{ lang('ACP_THUNDER_CUSTOMMENU_ADD_SUBMENU')|e('html_attr') }}">+</button>':'')+(allowRemove?'<button type="button" class="button2 tbcm-remove" title="{{ lang('ACP_THUNDER_CUSTOMMENU_REMOVE_ITEM')|e('html_attr') }}">×</button>':''))
++'</div>';
+}
+function childNodeHtml(item){
+var html='<div class="tbcm-node">'+rowHtml(item,true,true)+'<div class="tbcm-nested">';
+if(Array.isArray(item.children))item.children.forEach(function(ch){html+=childNodeHtml(ch)});
+return html+'</div></div>';
+}
+function cardHtml(item){
+var quick=item.type==='quicklinks';
+var isMenu=Array.isArray(item.children);
+var html='<div class="tbcm-card'+(quick?' tbcm-card-quick':'')+'">'
++'<div class="tbcm-card-head"><div class="tbcm-card-title"><div class="tbcm-card-move"><button type="button" class="button2 tbcm-card-up" title="{{ lang('ACP_THUNDER_CUSTOMMENU_MOVE_UP')|e('html_attr') }}">↑</button><button type="button" class="button2 tbcm-card-down" title="{{ lang('ACP_THUNDER_CUSTOMMENU_MOVE_DOWN')|e('html_attr') }}">↓</button></div><strong>'+esc(item.title||'Menu')+'</strong></div>'
++(quick?'<span class="tbcm-locked-label">{{ lang('ACP_THUNDER_CUSTOMMENU_QUICK_LINKS_AUTO')|e('js') }}</span>':'<button type="button" class="button2 tbcm-remove-card" title="{{ lang('ACP_THUNDER_CUSTOMMENU_REMOVE_MENU')|e('html_attr') }}">×</button>')+'</div>'
++rowHtml(item,!quick && isMenu,false)+'<div class="tbcm-children">';
+if(Array.isArray(item.children))item.children.forEach(function(ch){html+=childNodeHtml(ch)});
+return html+'</div></div>';
+}
+function render(){items.innerHTML='';initial.forEach(function(item){items.insertAdjacentHTML('beforeend',cardHtml(item))});bind();collect()}
+function readRow(row){var item={title:row.querySelector('.tbcm-title').value.trim(),icon:row.querySelector('.tbcm-icon').value.trim(),url:row.querySelector('.tbcm-url').value.trim(),target:row.querySelector('.tbcm-target').value};var q=row.dataset.quicklinkId;if(q)item.quicklink_id=q;return item}
+function readChildren(container){var result=[];if(!container)return result;Array.prototype.forEach.call(container.children,function(node){if(!node.classList.contains('tbcm-node'))return;var row=node.querySelector(':scope > .tbcm-row');if(!row)return;var item=readRow(row);if(item.title){var children=readChildren(node.querySelector(':scope > .tbcm-nested'));if(children.length)item.children=children;result.push(item)}});return result}
+function collect(){var data=[];Array.prototype.forEach.call(items.children,function(card){if(!card.classList.contains('tbcm-card'))return;var p=card.querySelector(':scope > .tbcm-row');if(!p)return;var item=readRow(p);if(card.classList.contains('tbcm-card-quick'))item.type='quicklinks';var children=readChildren(card.querySelector(':scope > .tbcm-children'));if(children.length)item.children=children;if(item.title)data.push(item)});hidden.value=JSON.stringify(data);return data}
+function bind(){
+items.querySelectorAll('.tbcm-remove-card').forEach(function(b){b.onclick=function(){b.closest('.tbcm-card').remove();initial=collect()}});
+items.querySelectorAll('.tbcm-remove').forEach(function(b){b.onclick=function(){b.closest('.tbcm-node').remove();initial=collect()}});
+items.querySelectorAll('.tbcm-add-sub').forEach(function(b){b.onclick=function(){var node=b.closest('.tbcm-node');var container=node?node.querySelector(':scope > .tbcm-nested'):b.closest('.tbcm-card').querySelector(':scope > .tbcm-children');if(!container)return;container.insertAdjacentHTML('beforeend',childNodeHtml({}));bind();initial=collect();var added=container.lastElementChild;if(added){var input=added.querySelector(':scope > .tbcm-row .tbcm-title');if(input){input.focus();input.select()}}}});
+items.querySelectorAll('.tbcm-card-up').forEach(function(b){b.onclick=function(){moveNode(b.closest('.tbcm-card'),'up',items)}});
+items.querySelectorAll('.tbcm-card-down').forEach(function(b){b.onclick=function(){moveNode(b.closest('.tbcm-card'),'down',items)}});
+items.querySelectorAll('.tbcm-move-up').forEach(function(b){b.onclick=function(){var node=b.closest('.tbcm-node');if(node)moveNode(node,'up',node.parentElement)}});
+items.querySelectorAll('.tbcm-move-down').forEach(function(b){b.onclick=function(){var node=b.closest('.tbcm-node');if(node)moveNode(node,'down',node.parentElement)}});
+items.querySelectorAll('input,select').forEach(function(el){el.addEventListener('input',collect);el.addEventListener('change',collect)});
+}
+form.addEventListener('submit',function(){collect()});
+document.getElementById('tbcm-add-link').onclick=function(){initial=collect();initial.unshift({title:'Nuovo link',url:'',icon:'fa-link',target:'_self'});render();var card=items.firstElementChild;if(card){card.scrollIntoView({behavior:'smooth',block:'start'});var input=card.querySelector('.tbcm-title');if(input){input.focus();input.select()}}};
+document.getElementById('tbcm-add-menu').onclick=function(){initial=collect();initial.unshift({title:'Nuovo menu',url:'',icon:'fa-bars',target:'_self',children:[]});render();var card=items.firstElementChild;if(card){card.scrollIntoView({behavior:'smooth',block:'start'});var input=card.querySelector('.tbcm-title');if(input){input.focus();input.select()}}};
+render();
+})();
+</script>
+{% INCLUDE 'overall_footer.html' %}
+

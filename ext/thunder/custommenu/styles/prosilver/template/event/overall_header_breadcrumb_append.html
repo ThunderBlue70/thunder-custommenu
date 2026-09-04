@@ -1,0 +1,11 @@
+{% if THUNDER_CUSTOMMENU_ENABLED and THUNDER_CUSTOMMENU_HIDE_INDEX %}
+<script>
+(function () {
+    var indexLink = document.querySelector('.crumb a[data-navbar-reference="index"]');
+    if (indexLink) {
+        var crumb = indexLink.closest('.crumb');
+        if (crumb) crumb.style.display = 'none';
+    }
+})();
+</script>
+{% endif %}

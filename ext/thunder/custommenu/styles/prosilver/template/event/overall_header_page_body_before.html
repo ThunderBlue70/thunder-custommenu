@@ -1,0 +1,64 @@
+{% if THUNDER_CUSTOMMENU_ENABLED and THUNDER_CUSTOMMENU_POSITION == 'separate' %}
+{% INCLUDECSS '@thunder_custommenu/custommenu.css' %}
+<nav class="tbcm-menu tbcm-separate{% if THUNDER_CUSTOMMENU_SHOW_SEARCH %} tbcm-has-search{% endif %}" style="--tbcm-bg: {{ THUNDER_CUSTOMMENU_BG }}; --tbcm-hover: {{ THUNDER_CUSTOMMENU_HOVER }}; --tbcm-text: {{ THUNDER_CUSTOMMENU_TEXT }}; --tbcm-width: {{ THUNDER_CUSTOMMENU_WIDTH }}px; --tbcm-height: {{ THUNDER_CUSTOMMENU_HEIGHT }}px; --tbcm-dropdown-bg: {{ THUNDER_CUSTOMMENU_DROPDOWN_BG }}; --tbcm-dropdown-hover: {{ THUNDER_CUSTOMMENU_DROPDOWN_HOVER }}; --tbcm-dropdown-text: {{ THUNDER_CUSTOMMENU_DROPDOWN_TEXT }};" aria-label="Menu principale">
+    <div class="tbcm-inner">
+        <div class="tbcm-items">
+{% macro render_submenu(items) %}
+    {% import _self as macros %}
+    {% for child in items %}
+        {% set child_url = child.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
+        <div class="tbcm-dropdown-item{% if child.children is defined and child.children|length %} tbcm-has-submenu{% endif %}">
+            <a href="{{ child_url|e('html_attr') }}"{% if child.target is defined and child.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
+            </a>
+            {% if child.children is defined and child.children|length %}
+                <div class="tbcm-submenu">{{ macros.render_submenu(child.children) }}</div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endmacro %}
+        {% import _self as macros %}
+        {% for item in THUNDER_CUSTOMMENU_MENU %}
+            {% if item.children is defined and item.children|length %}
+                <div class="tbcm-item{% if item.type is defined and item.type == 'quicklinks' %} tbcm-quicklinks{% endif %}">
+                    <button class="tbcm-toggle" type="button" aria-expanded="false">
+                        {% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}
+                        <span>{{ item.title|e }}</span><span class="tbcm-arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="tbcm-dropdown">{{ macros.render_submenu(item.children) }}</div>
+                </div>
+            {% else %}
+                {% set item_url = item.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
+                <a class="tbcm-link" href="{{ item_url|e('html_attr') }}"{% if item.target is defined and item.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+                    {% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ item.title|e }}</span>
+                </a>
+            {% endif %}
+        {% endfor %}
+        </div>
+        {% if THUNDER_CUSTOMMENU_SHOW_SEARCH %}<div class="tbcm-search-slot" aria-label="Cerca"></div>{% endif %}
+    </div>
+</nav>
+<script>
+(function () {
+    var menu = document.querySelector('.tbcm-separate');
+    if (!menu) return;
+    var searchBox = document.getElementById('search-box');
+    var searchSlot = menu.querySelector('.tbcm-search-slot');
+    if (searchSlot && searchBox) { searchSlot.appendChild(searchBox); searchBox.classList.add('tbcm-moved-search'); searchBox.style.display = ''; }
+    {% if THUNDER_CUSTOMMENU_SHOW_QUICK_LINKS %}var quickLinks = document.getElementById('quick-links'); if (quickLinks) quickLinks.classList.add('tbcm-original-hidden');{% endif %}
+    menu.querySelectorAll('.tbcm-toggle').forEach(function (button) {
+        if (button.dataset.tbcmReady) return;
+        button.dataset.tbcmReady = '1';
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            var item = button.closest('.tbcm-item'), open = item.classList.contains('tbcm-open');
+            menu.querySelectorAll('.tbcm-item.tbcm-open').forEach(function (other) { other.classList.remove('tbcm-open'); var b = other.querySelector('.tbcm-toggle'); if (b) b.setAttribute('aria-expanded', 'false'); });
+            if (!open) { item.classList.add('tbcm-open'); button.setAttribute('aria-expanded', 'true'); }
+        });
+    });
+    document.addEventListener('click', function (event) {
+        if (!event.target.closest('.tbcm-menu')) menu.querySelectorAll('.tbcm-item.tbcm-open').forEach(function (item) { item.classList.remove('tbcm-open'); var b = item.querySelector('.tbcm-toggle'); if (b) b.setAttribute('aria-expanded', 'false'); });
+    });
+})();
+</script>
+{% endif %}
