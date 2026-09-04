@@ -308,7 +308,7 @@ class main_module
             'THUNDER_CUSTOMMENU_WIDTH' => (int) $config['thunder_custommenu_width'],
             'THUNDER_CUSTOMMENU_HEIGHT' => (int) ($config['thunder_custommenu_height'] ?? 44),
             'THUNDER_CUSTOMMENU_POSITION' => $config['thunder_custommenu_position'] ?? 'integrated',
-            'THUNDER_CUSTOMMENU_MENU_JSON' => json_encode($menu_array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'THUNDER_CUSTOMMENU_MENU_JSON' => json_encode($menu_array, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT),
             'U_ACTION' => $this->u_action,
         ]);
     }
