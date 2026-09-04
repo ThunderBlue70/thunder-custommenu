@@ -1,7 +1,7 @@
 {
     "stable": {
         "1.0": {
-            "current": "1.0.0",
+            "current": "1.0.1",
             "download": "https://github.com/ThunderBlue70/thunder-custommenu/releases/latest/download/thunder_custommenu.zip",
             "announcement": "https://github.com/ThunderBlue70/thunder-custommenu",
             "eol": null,
