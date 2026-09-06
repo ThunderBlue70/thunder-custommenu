@@ -32,4 +32,4 @@
 .tbcm-search-slot .search-box.tbcm-moved-search .button-search-end{border-radius:0 4px 4px 0}
 .tbcm-search-slot .search-box.tbcm-moved-search .button-search + .button-search-end{margin-left:1px}
 .tbcm-original-hidden{display:none!important}
-@media(max-width:700px){.tbcm-inner{align-items:stretch}.tbcm-items{width:100%}.tbcm-link,.tbcm-toggle{min-height:var(--tbcm-height,42px);padding:0 12px}.tbcm-dropdown{max-width:calc(100vw - 20px)}.tbcm-submenu{max-width:calc(100vw - 20px)}.tbcm-search-slot{margin-left:auto;padding:0 6px}.tbcm-search-slot .search-box.tbcm-moved-search .inputbox.search{width:105px}}
+@media(max-width:700px){.tbcm-menu{display:none!important}.tbcm-inner{align-items:stretch}.tbcm-items{width:100%}.tbcm-link,.tbcm-toggle{min-height:var(--tbcm-height,42px);padding:0 12px}.tbcm-dropdown{max-width:calc(100vw - 20px)}.tbcm-submenu{max-width:calc(100vw - 20px)}.tbcm-search-slot{margin-left:auto;padding:0 6px}.tbcm-search-slot .search-box.tbcm-moved-search .inputbox.search{width:105px}}
