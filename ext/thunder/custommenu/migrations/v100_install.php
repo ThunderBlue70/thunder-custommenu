@@ -12,10 +12,10 @@ class v100_install extends \phpbb\db\migration\migration
     {
         return [
             ['config.add', ['thunder_custommenu_enabled', 0]],
-            ['config.add', ['thunder_custommenu_bg', '#222222']],
-            ['config.add', ['thunder_custommenu_hover', '#444444']],
+            ['config.add', ['thunder_custommenu_bg', '#12A3EB']],
+            ['config.add', ['thunder_custommenu_hover', '#0179B4']],
             ['config.add', ['thunder_custommenu_text', '#FFFFFF']],
-            ['config.add', ['thunder_custommenu_width', 1100]],
+            ['config.add', ['thunder_custommenu_width', 1150]],
             ['config_text.add', ['thunder_custommenu_menu', json_encode([
                 ['title' => 'Home', 'url' => 'index.php', 'icon' => 'fa-home', 'target' => '_self'],
                 ['title' => 'Forum', 'url' => '', 'icon' => 'fa-comments', 'target' => '_self', 'children' => [

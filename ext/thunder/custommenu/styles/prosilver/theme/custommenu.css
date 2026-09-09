@@ -29,7 +29,6 @@
 .tbcm-search-slot .search-box.tbcm-moved-search .button-search + .button-search-end{margin-left:1px}
 .tbcm-original-hidden{display:none!important}
 .tbcm-mobile-toggle{display:none}
-
 /* Desktop */
 @media(min-width:1025px) and (hover:hover) and (pointer:fine){
 .tbcm-link:hover,.tbcm-toggle:hover,.tbcm-item:hover>.tbcm-toggle{background:var(--tbcm-hover);color:var(--tbcm-text);text-decoration:none}
@@ -38,7 +37,6 @@
 .tbcm-dropdown a:hover,.tbcm-dropdown .tbcm-submenu-label:hover{background:var(--tbcm-dropdown-hover);color:var(--tbcm-dropdown-text);text-decoration:none;transform:translateX(2px) scale(1.01);filter:brightness(1.01)}
 .tbcm-dropdown-item:hover>.tbcm-submenu{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0) scaleX(1)}
 }
-
 /* Mobile e tablet */
 @media(max-width:1024px){
 .tbcm-menu{display:block!important;width:100%;margin:0;border-radius:0 0 9px 9px}
@@ -74,7 +72,6 @@
 .tbcm-search-slot .search-box.tbcm-moved-search .inputbox.search{width:calc(100% - 25px);max-width:none}
 .tbcm-menu.tbcm-mobile-open .tbcm-mobile-toggle{border-radius:0}
 }
-
 /* Tablet touch landscape */
 @media(min-width:1025px) and (hover:none){
 .tbcm-menu{display:block!important;width:100%;margin:0;border-radius:0 0 9px 9px}
