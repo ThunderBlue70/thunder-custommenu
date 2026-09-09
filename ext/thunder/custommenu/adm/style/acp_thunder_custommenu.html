@@ -79,7 +79,7 @@ return '<div class="tbcm-row'+(locked?' tbcm-locked':'')+'" data-quicklink-id="'
 +'<input class="tbcm-title" type="text" placeholder="{{ lang('ACP_THUNDER_CUSTOMMENU_TITLE_FIELD')|e('js') }}" value="'+esc(item.title)+'"'+(locked?' readonly':'')+'>'
 +'<input class="tbcm-icon" type="text" placeholder="fa-home" value="'+esc(item.icon)+'"'+(locked?' readonly':'')+'>'
 +'<input class="tbcm-url" type="text" placeholder="https://... oppure ./ ../ index.php" value="'+esc(item.url)+'"'+(locked?' readonly':'')+'>'
-+'<select class="tbcm-target"'+(locked?' disabled':'')+'><option value="_self"'+(item.target!=='_blank'?' selected':'')+'>Stessa scheda</option><option value="_blank"'+(item.target==='_blank'?' selected':'')+'>Nuova scheda</option></select>'
++'<select class="tbcm-target"'+(locked?' disabled':'')+'><option value="_self"'+(item.target!=='_blank'?' selected':'')+'>{{ lang('ACP_THUNDER_CUSTOMMENU_SAME_TAB')|e('js') }}</option><option value="_blank"'+(item.target==='_blank'?' selected':'')+'>{{ lang('ACP_THUNDER_CUSTOMMENU_NEW_TAB')|e('js') }}</option></select>'
 +(locked?'<span class="tbcm-lock" title="{{ lang('ACP_THUNDER_CUSTOMMENU_QUICK_LINKS_LOCKED')|e('html_attr') }}">🔒</span>':(allowSub?'<button type="button" class="button2 tbcm-add-sub" title="{{ lang('ACP_THUNDER_CUSTOMMENU_ADD_SUBMENU')|e('html_attr') }}">+</button>':'')+(allowRemove?'<button type="button" class="button2 tbcm-remove" title="{{ lang('ACP_THUNDER_CUSTOMMENU_REMOVE_ITEM')|e('html_attr') }}">×</button>':''))
 +'</div>';
 }

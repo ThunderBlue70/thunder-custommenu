@@ -23,6 +23,7 @@ class main_listener implements EventSubscriberInterface
         $this->template = $template;
         $this->user = $user;
         $this->auth = $auth;
+        $this->user->add_lang_ext('thunder/custommenu', 'common');
     }
 
     public static function getSubscribedEvents()

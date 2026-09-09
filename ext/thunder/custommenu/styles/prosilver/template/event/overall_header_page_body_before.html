@@ -2,202 +2,171 @@
 {% INCLUDECSS '@thunder_custommenu/custommenu.css' %}
 <nav class="tbcm-menu tbcm-separate{% if THUNDER_CUSTOMMENU_SHOW_SEARCH %} tbcm-has-search{% endif %}" style="--tbcm-bg: {{ THUNDER_CUSTOMMENU_BG }}; --tbcm-hover: {{ THUNDER_CUSTOMMENU_HOVER }}; --tbcm-text: {{ THUNDER_CUSTOMMENU_TEXT }}; --tbcm-width: {{ THUNDER_CUSTOMMENU_WIDTH }}px; --tbcm-height: {{ THUNDER_CUSTOMMENU_HEIGHT }}px; --tbcm-dropdown-bg: {{ THUNDER_CUSTOMMENU_DROPDOWN_BG }}; --tbcm-dropdown-hover: {{ THUNDER_CUSTOMMENU_DROPDOWN_HOVER }}; --tbcm-dropdown-text: {{ THUNDER_CUSTOMMENU_DROPDOWN_TEXT }};" aria-label="Menu principale">
 <div class="tbcm-inner">
-    <button class="tbcm-mobile-toggle" type="button" aria-expanded="false">
-        <span>MENU</span>
-        <span class="tbcm-mobile-arrow" aria-hidden="true">▾</span>
-    </button>
-    <div class="tbcm-items">
+<button class="tbcm-mobile-toggle" type="button" aria-expanded="false">
+<span>☰ {{ lang('THUNDER_CUSTOMMENU_OPEN') }}</span>
+<span class="tbcm-mobile-arrow" aria-hidden="true">▾</span>
+</button>
+<div class="tbcm-items">
 {% macro render_submenu(items) %}
 {% import _self as macros %}
 {% for child in items %}
-    {% set child_url = child.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
-    <div class="tbcm-dropdown-item{% if child.children is defined and child.children|length %} tbcm-has-submenu{% endif %}">
-        {% if child_url %}
+{% set child_url = child.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
+<div class="tbcm-dropdown-item{% if child.children is defined and child.children|length %} tbcm-has-submenu{% endif %}">
+{% if child_url %}
 <a href="{{ child_url|e('html_attr') }}"{% if child.target is defined and child.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
-    {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
+{% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
 </a>
 {% else %}
 <span class="tbcm-submenu-label">
-    {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
+{% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
 </span>
 {% endif %}
-        {% if child.children is defined and child.children|length %}
-            <div class="tbcm-submenu">{{ macros.render_submenu(child.children) }}</div>
-        {% endif %}
-    </div>
+{% if child.children is defined and child.children|length %}
+<div class="tbcm-submenu">{{ macros.render_submenu(child.children) }}</div>
+{% endif %}
+</div>
 {% endfor %}
 {% endmacro %}
-    {% import _self as macros %}
-    {% for item in THUNDER_CUSTOMMENU_MENU %}
-        {% if item.children is defined and item.children|length %}
-            <div class="tbcm-item{% if item.type is defined and item.type == 'quicklinks' %} tbcm-quicklinks{% endif %}">
-                <button class="tbcm-toggle" type="button" aria-expanded="false">
-                    {% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}
-                    <span>{{ item.title|e }}</span><span class="tbcm-arrow" aria-hidden="true">▾</span>
-                </button>
-                <div class="tbcm-dropdown">{{ macros.render_submenu(item.children) }}</div>
-            </div>
-        {% else %}
-            {% set item_url = item.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
-            <a class="tbcm-link" href="{{ item_url|e('html_attr') }}"{% if item.target is defined and item.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
-                {% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ item.title|e }}</span>
-            </a>
-        {% endif %}
-    {% endfor %}
-    </div>
-    {% if THUNDER_CUSTOMMENU_SHOW_SEARCH %}<div class="tbcm-search-slot" aria-label="Cerca"></div>{% endif %}
+{% import _self as macros %}
+{% for item in THUNDER_CUSTOMMENU_MENU %}
+{% if item.children is defined and item.children|length %}
+<div class="tbcm-item{% if item.type is defined and item.type == 'quicklinks' %} tbcm-quicklinks{% endif %}">
+<button class="tbcm-toggle" type="button" aria-expanded="false">
+{% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}
+<span>{{ item.title|e }}</span><span class="tbcm-arrow" aria-hidden="true">▾</span>
+</button>
+<div class="tbcm-dropdown">{{ macros.render_submenu(item.children) }}</div>
+</div>
+{% else %}
+{% set item_url = item.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
+<a class="tbcm-link" href="{{ item_url|e('html_attr') }}"{% if item.target is defined and item.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+{% if item.icon is defined and item.icon %}<i class="icon {{ item.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ item.title|e }}</span>
+</a>
+{% endif %}
+{% endfor %}
+</div>
+{% if THUNDER_CUSTOMMENU_SHOW_SEARCH %}<div class="tbcm-search-slot" aria-label="Cerca"></div>{% endif %}
 </div>
 </nav>
 <script>
 (function () {
-    var menu = document.querySelector('.tbcm-separate');
-    if (!menu) return;
-    var mobileToggle = menu.querySelector('.tbcm-mobile-toggle');
-    var searchBox = document.getElementById('search-box');
-    var searchSlot = menu.querySelector('.tbcm-search-slot');
-    if (searchSlot && searchBox) {
-        searchSlot.appendChild(searchBox);
-        searchBox.classList.add('tbcm-moved-search');
-        searchBox.style.display = '';
-    }
-    {% if THUNDER_CUSTOMMENU_SHOW_QUICK_LINKS %}
-    var quickLinks = document.getElementById('quick-links');
-    if (quickLinks) quickLinks.classList.add('tbcm-original-hidden');
-    {% endif %}
-    /*
-     * Chiude tutti i menu aperti sotto un determinato contenitore.
-     */
-    function closeChildren(container) {
-        container.querySelectorAll('.tbcm-open').forEach(function (element) {
-            element.classList.remove('tbcm-open');
-            var button = element.querySelector(':scope > .tbcm-toggle');
-            if (button) {
-                button.setAttribute('aria-expanded', 'false');
-            }
-        });
-        container.querySelectorAll('.tbcm-toggle').forEach(function (button) {
-            button.setAttribute('aria-expanded', 'false');
-        });
-    }
-    /*
-     * Chiude i fratelli dello stesso livello.
-     */
-    function closeSiblingItems(item) {
-        var parent = item.parentElement;
-        if (!parent) return;
-        Array.prototype.forEach.call(parent.children, function (sibling) {
-            if (sibling === item) return;
-            if (!sibling.classList.contains('tbcm-dropdown-item')) return;
-            sibling.classList.remove('tbcm-open');
-            var siblingButton = sibling.querySelector(':scope > .tbcm-toggle');
-            if (siblingButton) {
-                siblingButton.setAttribute('aria-expanded', 'false');
-            }
-            sibling.querySelectorAll('.tbcm-open').forEach(function (nested) {
-                nested.classList.remove('tbcm-open');
-                var nestedButton = nested.querySelector(':scope > .tbcm-toggle');
-                if (nestedButton) {
-                    nestedButton.setAttribute('aria-expanded', 'false');
-                }
-            });
-        });
-    }
-    /*
-     * Apertura/chiusura del menu principale su mobile.
-     */
-    if (mobileToggle) {
-        mobileToggle.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            var open = menu.classList.contains('tbcm-mobile-open');
-            if (open) {
-                menu.classList.remove('tbcm-mobile-open');
-                mobileToggle.setAttribute('aria-expanded', 'false');
-                closeChildren(menu);
-            } else {
-                menu.classList.add('tbcm-mobile-open');
-                mobileToggle.setAttribute('aria-expanded', 'true');
-            }
-        });
-    }
-    /*
-     * Menu principali.
-     */
-    menu.querySelectorAll('.tbcm-toggle').forEach(function (button) {
-        if (button.dataset.tbcmReady) return;
-        button.dataset.tbcmReady = '1';
-        button.addEventListener('click', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            var item = button.closest('.tbcm-item');
-            if (!item) return;
-            var open = item.classList.contains('tbcm-open');
-            menu.querySelectorAll('.tbcm-item.tbcm-open').forEach(function (other) {
-                if (other !== item) {
-                    other.classList.remove('tbcm-open');
-                    var otherButton = other.querySelector(':scope > .tbcm-toggle');
-                    if (otherButton) {
-                        otherButton.setAttribute('aria-expanded', 'false');
-                    }
-                    other.querySelectorAll('.tbcm-open').forEach(function (nested) {
-                        nested.classList.remove('tbcm-open');
-                    });
-                }
-            });
-            if (open) {
-                item.classList.remove('tbcm-open');
-                button.setAttribute('aria-expanded', 'false');
-                item.querySelectorAll('.tbcm-open').forEach(function (nested) {
-                    nested.classList.remove('tbcm-open');
-                });
-            } else {
-                item.classList.add('tbcm-open');
-                button.setAttribute('aria-expanded', 'true');
-            }
-        });
-    });
-    /*
-     * Sottomenu multilivello.
-     *
-     * Se l'elemento contiene figli:
-     * - su mobile il primo tocco apre il livello;
-     * - non viene seguito il link del genitore.
-     *
-     * Se non contiene figli:
-     * - il normale link continua a funzionare.
-     */
-    menu.querySelectorAll('.tbcm-dropdown-item.tbcm-has-submenu').forEach(function (item) {
-        var trigger = item.querySelector(':scope > a, :scope > .tbcm-submenu-label');
-        if (!trigger) return;
-        trigger.addEventListener('click', function (event) {
-            if (window.matchMedia('(max-width: 700px)').matches) {
-                event.preventDefault();
-                event.stopPropagation();
-                closeSiblingItems(item);
-                var open = item.classList.contains('tbcm-open');
-                if (open) {
-                    item.classList.remove('tbcm-open');
-                } else {
-                    item.classList.add('tbcm-open');
-                }
-            }
-        });
-    });
-    /*
-     * Su desktop mantiene il comportamento originale:
-     * apertura dei menu principali al click.
-     */
-    document.addEventListener('click', function (event) {
-        if (!event.target.closest('.tbcm-menu')) {
-            menu.querySelectorAll('.tbcm-item.tbcm-open').forEach(function (item) {
-                item.classList.remove('tbcm-open');
-                var button = item.querySelector(':scope > .tbcm-toggle');
-                if (button) {
-                    button.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
-    });
+var menu = document.querySelector('.tbcm-separate');
+if (!menu) return;
+var mobileToggle = menu.querySelector('.tbcm-mobile-toggle');
+var searchBox = document.getElementById('search-box');
+var searchSlot = menu.querySelector('.tbcm-search-slot');
+function isMobileLayout() {
+return window.matchMedia('(max-width:1024px)').matches || (navigator.maxTouchPoints > 0 && window.matchMedia('(max-width:1400px)').matches);
+}
+if (searchSlot && searchBox) {
+searchSlot.appendChild(searchBox);
+searchBox.classList.add('tbcm-moved-search');
+searchBox.style.display = '';
+}
+{% if THUNDER_CUSTOMMENU_SHOW_QUICK_LINKS %}
+var quickLinks = document.getElementById('quick-links');
+if (quickLinks) quickLinks.classList.add('tbcm-original-hidden');
+{% endif %}
+function closeChildren(container) {
+container.querySelectorAll('.tbcm-open').forEach(function (element) {
+element.classList.remove('tbcm-open');
+});
+container.querySelectorAll('.tbcm-toggle').forEach(function (button) {
+button.setAttribute('aria-expanded', 'false');
+});
+container.querySelectorAll('.tbcm-submenu-label').forEach(function (element) {
+element.setAttribute('aria-expanded', 'false');
+});
+}
+function closeSiblingItems(item) {
+var parent = item.parentElement;
+if (!parent) return;
+Array.prototype.forEach.call(parent.children, function (sibling) {
+if (sibling === item) return;
+if (!sibling.classList.contains('tbcm-dropdown-item')) return;
+sibling.classList.remove('tbcm-open');
+sibling.querySelectorAll('.tbcm-open').forEach(function (nested) {
+nested.classList.remove('tbcm-open');
+});
+sibling.querySelectorAll('.tbcm-submenu-label').forEach(function (element) {
+element.setAttribute('aria-expanded', 'false');
+});
+});
+}
+if (mobileToggle) {
+mobileToggle.addEventListener('click', function (event) {
+if (!isMobileLayout()) return;
+event.preventDefault();
+event.stopPropagation();
+var open = menu.classList.contains('tbcm-mobile-open');
+if (open) {
+menu.classList.remove('tbcm-mobile-open');
+mobileToggle.setAttribute('aria-expanded', 'false');
+closeChildren(menu);
+} else {
+menu.classList.add('tbcm-mobile-open');
+mobileToggle.setAttribute('aria-expanded', 'true');
+}
+});
+}
+menu.querySelectorAll('.tbcm-toggle').forEach(function (button) {
+if (button.dataset.tbcmReady) return;
+button.dataset.tbcmReady = '1';
+button.addEventListener('click', function (event) {
+if (!isMobileLayout()) return;
+event.preventDefault();
+event.stopPropagation();
+var item = button.closest('.tbcm-item');
+if (!item) return;
+var open = item.classList.contains('tbcm-open');
+menu.querySelectorAll('.tbcm-item.tbcm-open').forEach(function (other) {
+if (other !== item) {
+other.classList.remove('tbcm-open');
+var otherButton = other.querySelector(':scope > .tbcm-toggle');
+if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
+other.querySelectorAll('.tbcm-open').forEach(function (nested) {
+nested.classList.remove('tbcm-open');
+});
+}
+});
+if (open) {
+item.classList.remove('tbcm-open');
+button.setAttribute('aria-expanded', 'false');
+item.querySelectorAll('.tbcm-open').forEach(function (nested) {
+nested.classList.remove('tbcm-open');
+});
+} else {
+item.classList.add('tbcm-open');
+button.setAttribute('aria-expanded', 'true');
+}
+});
+});
+menu.querySelectorAll('.tbcm-dropdown-item.tbcm-has-submenu').forEach(function (item) {
+var trigger = item.querySelector(':scope > a, :scope > .tbcm-submenu-label');
+if (!trigger) return;
+trigger.addEventListener('click', function (event) {
+if (!isMobileLayout()) return;
+event.preventDefault();
+event.stopPropagation();
+closeSiblingItems(item);
+var open = item.classList.contains('tbcm-open');
+if (open) {
+item.classList.remove('tbcm-open');
+trigger.setAttribute('aria-expanded', 'false');
+} else {
+item.classList.add('tbcm-open');
+trigger.setAttribute('aria-expanded', 'true');
+}
+});
+});
+document.addEventListener('click', function (event) {
+if (!isMobileLayout()) return;
+if (!event.target.closest('.tbcm-menu')) {
+menu.classList.remove('tbcm-mobile-open');
+if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+closeChildren(menu);
+}
+});
 })();
 </script>
 {% endif %}
