@@ -2,14 +2,14 @@
     "name": "thunder/custommenu",
     "type": "phpbb-extension",
     "description": "A fully configurable menu system for phpBB with dropdown menus, multi-level submenus, Font Awesome icons, Quick Links integration and integrated search.",
-    "homepage": "https://techstudio.altervista.org/",
-    "version": "1.0.1",
-    "time": "2026-09-02",
+    "homepage": "https://github.com/ThunderBlue70/thunder-custommenu",
+    "version": "1.0.2",
+    "time": "2026-09-09",
     "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "ThunderBlue",
-            "homepage": "https://techstudio.altervista.org/",
+            "homepage": "https://github.com/ThunderBlue70/thunder-custommenu",
             "role": "Developer"
         }
     ],

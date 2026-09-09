@@ -8,9 +8,15 @@
     {% for child in items %}
         {% set child_url = child.url|replace({'{U_INDEX}': U_INDEX, '{U_SEARCH}': U_SEARCH, '{U_SEARCH_NEW}': U_SEARCH_NEW, '{U_SEARCH_UNREAD}': U_SEARCH_UNREAD, '{U_SEARCH_UNANSWERED}': U_SEARCH_UNANSWERED, '{U_SEARCH_ACTIVE_TOPICS}': U_SEARCH_ACTIVE_TOPICS, '{U_SEARCH_SELF}': U_SEARCH_SELF, '{U_MEMBERLIST}': U_MEMBERLIST, '{U_TEAM}': U_TEAM, '{U_MARK_FORUMS}': U_MARK_FORUMS}) %}
         <div class="tbcm-dropdown-item{% if child.children is defined and child.children|length %} tbcm-has-submenu{% endif %}">
-            <a href="{{ child_url|e('html_attr') }}"{% if child.target is defined and child.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
-                {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
-            </a>
+            {% if child_url %}
+    <a href="{{ child_url|e('html_attr') }}"{% if child.target is defined and child.target == '_blank' %} target="_blank" rel="noopener noreferrer"{% endif %}>
+        {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
+    </a>
+{% else %}
+    <span class="tbcm-submenu-label">
+        {% if child.icon is defined and child.icon %}<i class="icon {{ child.icon|e }}" aria-hidden="true"></i>{% endif %}<span>{{ child.title|e }}</span>{% if child.children is defined and child.children|length %}<span class="tbcm-sub-arrow" aria-hidden="true">▸</span>{% endif %}
+    </span>
+{% endif %}
             {% if child.children is defined and child.children|length %}
                 <div class="tbcm-submenu">{{ macros.render_submenu(child.children) }}</div>
             {% endif %}
