@@ -5,6 +5,8 @@
 .tbcm-inner{width:100%;min-height:var(--tbcm-height,44px);display:flex;align-items:center;box-sizing:border-box;overflow:visible}
 .tbcm-items{min-width:0;flex:1 1 auto;display:flex;align-items:stretch;flex-wrap:wrap;overflow:visible}
 .tbcm-link,.tbcm-toggle{min-height:var(--tbcm-height,44px);padding:0 18px;display:flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;color:var(--tbcm-text);background:transparent;border:0;text-decoration:none;font-size:13px;font-weight:600;line-height:1;cursor:pointer;white-space:nowrap}
+.tbcm-link{color:var(--tbcm-text)!important}
+.tbcm-dropdown a,.tbcm-dropdown .tbcm-submenu-label{color:var(--tbcm-dropdown-text)!important}
 .tbcm-items>:first-child.tbcm-link,.tbcm-items>:first-child.tbcm-item>.tbcm-toggle{border-bottom-left-radius:9px}
 .tbcm-items>:last-child.tbcm-link,.tbcm-items>:last-child.tbcm-item>.tbcm-toggle{border-bottom-right-radius:9px}
 .tbcm-item{position:relative}
@@ -56,14 +58,14 @@
 .tbcm-dropdown{position:static;width:100%;max-width:none;min-width:0;padding:0;display:none;opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:none;background:var(--tbcm-dropdown-bg);box-sizing:border-box}
 .tbcm-item.tbcm-open>.tbcm-dropdown{display:flex}
 .tbcm-dropdown-item{width:100%;min-width:0}
-.tbcm-dropdown a,.tbcm-dropdown .tbcm-submenu-label{width:100%;min-width:0;min-height:38px;padding:9px 14px;box-sizing:border-box;border-radius:0;transform:none;white-space:normal}
-.tbcm-dropdown a:hover,.tbcm-dropdown .tbcm-submenu-label:hover{transform:none}
-.tbcm-dropdown-item:last-child>a,.tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:0}
+.tbcm-dropdown a,.tbcm-dropdown .tbcm-submenu-label{width:calc(100% - 28px);min-width:0;min-height:38px;margin:3px auto;padding:9px 14px;box-sizing:border-box;border:1px solid rgba(0,0,0,.10);border-radius:7px;background:var(--tbcm-dropdown-bg);color:var(--tbcm-dropdown-text);box-shadow:0 1px 3px rgba(0,0,0,.12);transform:none;white-space:normal;transition:background-color .14s ease,transform .14s ease,filter .14s ease}
+.tbcm-dropdown a:hover,.tbcm-dropdown .tbcm-submenu-label:hover{background:var(--tbcm-dropdown-hover);color:var(--tbcm-dropdown-text);transform:translateX(2px) scale(1.01);filter:brightness(1.01)}
+.tbcm-dropdown-item:last-child>a,.tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:7px}
 .tbcm-submenu{position:static;width:100%;min-width:0;max-width:none;padding:0 0 0 14px;display:none;opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:none;box-sizing:border-box;background:transparent}
 .tbcm-dropdown-item.tbcm-open>.tbcm-submenu{display:flex}
 .tbcm-submenu::before{display:none}
 .tbcm-submenu .tbcm-dropdown-item{width:100%;min-width:0}
-.tbcm-submenu .tbcm-dropdown-item:last-child>a,.tbcm-submenu .tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:0}
+.tbcm-submenu .tbcm-dropdown-item:last-child>a,.tbcm-submenu .tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:7px}
 .tbcm-sub-arrow{margin-left:auto;padding-left:14px;flex:0 0 auto;transition:transform .18s ease}
 .tbcm-dropdown-item.tbcm-open>.tbcm-submenu-label .tbcm-sub-arrow,.tbcm-dropdown-item.tbcm-open>a .tbcm-sub-arrow{transform:rotate(90deg)}
 .tbcm-search-slot{display:none;width:100%;height:auto;margin:0;padding:8px 10px;justify-content:flex-start;align-items:center;box-sizing:border-box}
@@ -89,8 +91,9 @@
 .tbcm-dropdown{position:static;width:100%;max-width:none;min-width:0;padding:0;display:none;opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:none;background:var(--tbcm-dropdown-bg);box-sizing:border-box}
 .tbcm-item.tbcm-open>.tbcm-dropdown{display:flex}
 .tbcm-dropdown-item{width:100%;min-width:0}
-.tbcm-dropdown a,.tbcm-dropdown .tbcm-submenu-label{width:100%;min-width:0;min-height:38px;padding:9px 14px;box-sizing:border-box;border-radius:0;transform:none;white-space:normal}
-.tbcm-dropdown-item:last-child>a,.tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:0}
+.tbcm-dropdown a,.tbcm-dropdown .tbcm-submenu-label{width:calc(100% - 28px);min-width:0;min-height:38px;margin:3px auto;padding:9px 14px;box-sizing:border-box;border:1px solid rgba(0,0,0,.10);border-radius:7px;background:var(--tbcm-dropdown-bg);color:var(--tbcm-dropdown-text);box-shadow:0 1px 3px rgba(0,0,0,.12);transform:none;white-space:normal;transition:background-color .14s ease,transform .14s ease,filter .14s ease}
+.tbcm-dropdown-item:last-child>a,.tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:7px}
+.tbcm-submenu .tbcm-dropdown-item:last-child>a,.tbcm-submenu .tbcm-dropdown-item:last-child>.tbcm-submenu-label{border-radius:7px}
 .tbcm-submenu{position:static;width:100%;min-width:0;max-width:none;padding:0 0 0 14px;display:none;opacity:1;visibility:visible;pointer-events:auto;transform:none;transition:none;box-sizing:border-box;background:transparent}
 .tbcm-dropdown-item.tbcm-open>.tbcm-submenu{display:flex}
 .tbcm-submenu::before{display:none}
