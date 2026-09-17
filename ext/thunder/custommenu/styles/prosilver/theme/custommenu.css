@@ -1,6 +1,6 @@
 /* Thunder Custom Menu */
 .tbcm-menu{width:min(var(--tbcm-width),100%);margin:0 auto;position:relative;box-sizing:border-box;background:var(--tbcm-bg);color:var(--tbcm-text)}
-.tbcm-integrated{width:calc(100% + 10px);margin:0 -5px -5px;border-radius:0 0 9px 9px;overflow:visible;box-shadow:0 2px 8px rgba(0,0,0,.16);z-index:20}
+.tbcm-integrated{width:100%;margin:0 0 -5px;border-radius:0 0 9px 9px;overflow:visible;box-shadow:0 2px 8px rgba(0,0,0,.16);z-index:20}
 .tbcm-separate{border-radius:0 0 9px 9px;overflow:visible;box-shadow:0 2px 8px rgba(0,0,0,.16);z-index:1}
 .tbcm-inner{width:100%;min-height:var(--tbcm-height,44px);display:flex;align-items:center;box-sizing:border-box;overflow:visible}
 .tbcm-items{min-width:0;flex:1 1 auto;display:flex;align-items:stretch;flex-wrap:wrap;overflow:visible}
