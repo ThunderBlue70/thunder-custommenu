@@ -50,4 +50,5 @@ $lang = array_merge($lang, [
     'ACP_THUNDER_CUSTOMMENU_ADD_LINK' => '+ Crea link',
     'ACP_THUNDER_CUSTOMMENU_ADD_MENU' => '+ Crea menu a tendina',
     'ACP_THUNDER_CUSTOMMENU_TITLE_FIELD' => 'Titolo voce',
+    'ACP_THUNDER_CUSTOMMENU_URL_FIELD' => 'https://... oppure ./ ../ index.php',
 ]);

@@ -50,4 +50,5 @@ $lang = array_merge($lang, [
     'ACP_THUNDER_CUSTOMMENU_ADD_LINK' => '+ Create link',
     'ACP_THUNDER_CUSTOMMENU_ADD_MENU' => '+ Create dropdown menu',
     'ACP_THUNDER_CUSTOMMENU_TITLE_FIELD' => 'Item title',
+    'ACP_THUNDER_CUSTOMMENU_URL_FIELD' => 'https://... or ./ ../ index.php',
 ]);
