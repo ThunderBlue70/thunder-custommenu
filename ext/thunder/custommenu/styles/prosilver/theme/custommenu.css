@@ -105,3 +105,5 @@
 .tbcm-search-slot .search-box.tbcm-moved-search .inputbox.search{width:calc(100% - 25px);max-width:none}
 .tbcm-menu.tbcm-mobile-open .tbcm-mobile-toggle{border-radius:0}
 }
+/* Integrated: stretch over the header padding at every width */
+.tbcm-menu.tbcm-integrated{width:calc(100% + 10px);margin:0 -5px -5px}
